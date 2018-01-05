@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+swagger-codegen generate \
+ -i https://api.sandbox.wealthsimple.com/v1/swagger.json \
+ -l ruby \
+ -o . \
+ --config config.json
