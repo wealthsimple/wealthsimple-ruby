@@ -1,6 +1,7 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
-
-# Specify your gem's dependencies in wealthsimple.gemspec
 gemspec
+
+group :development, :test do
+  gem 'rake', '~> 12.0.0'
+end
