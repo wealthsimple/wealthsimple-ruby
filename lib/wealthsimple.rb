@@ -256,3 +256,4 @@ module Wealthsimple
     end
   end
 end
+require 'wealthsimple/custom'

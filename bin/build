@@ -12,3 +12,6 @@ swagger-codegen generate \
  -l ruby \
  -o . \
  --config config.json
+
+# Append custom config require to lib/wealthsimple.rb
+echo "require 'wealthsimple/custom'" >> lib/wealthsimple.rb
