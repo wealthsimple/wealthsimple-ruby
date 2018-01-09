@@ -19,8 +19,6 @@ module Wealthsimple
 
     attr_accessor :nickname
 
-    attr_accessor :base_currency
-
     attr_accessor :client_id
 
 
@@ -29,7 +27,6 @@ module Wealthsimple
       {
         :'type' => :'type',
         :'nickname' => :'nickname',
-        :'base_currency' => :'base_currency',
         :'client_id' => :'client_id'
       }
     end
@@ -39,7 +36,6 @@ module Wealthsimple
       {
         :'type' => :'AccountType',
         :'nickname' => :'String',
-        :'base_currency' => :'Currency',
         :'client_id' => :'ClientId'
       }
     end
@@ -58,10 +54,6 @@ module Wealthsimple
 
       if attributes.has_key?(:'nickname')
         self.nickname = attributes[:'nickname']
-      end
-
-      if attributes.has_key?(:'base_currency')
-        self.base_currency = attributes[:'base_currency']
       end
 
       if attributes.has_key?(:'client_id')
@@ -90,7 +82,6 @@ module Wealthsimple
       self.class == o.class &&
           type == o.type &&
           nickname == o.nickname &&
-          base_currency == o.base_currency &&
           client_id == o.client_id
     end
 
@@ -103,7 +94,7 @@ module Wealthsimple
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, nickname, base_currency, client_id].hash
+      [type, nickname, client_id].hash
     end
 
     # Builds the object from hash

@@ -24,7 +24,7 @@ module Wealthsimple
     # Open a new account for a client
     # @param account 
     # @param [Hash] opts the optional parameters
-    # @return [Account]
+    # @return [AccountCreatedResponse]
     def create_account(account, opts = {})
       data, _status_code, _headers = create_account_with_http_info(account, opts)
       return data
@@ -34,7 +34,7 @@ module Wealthsimple
     # Open a new account for a client
     # @param account 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Account, Fixnum, Hash)>] Account data, response status code and response headers
+    # @return [Array<(AccountCreatedResponse, Fixnum, Hash)>] AccountCreatedResponse data, response status code and response headers
     def create_account_with_http_info(account, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AccountsApi.create_account ..."
@@ -68,7 +68,7 @@ module Wealthsimple
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Account')
+        :return_type => 'AccountCreatedResponse')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AccountsApi#create_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

@@ -50,17 +50,53 @@ describe 'Account' do
     end
   end
 
-  describe 'test attribute "object"' do
+  describe 'test attribute "status"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-       #validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["account"])
+       #validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["open", "closed"])
        #validator.allowable_values.each do |value|
-       #  expect { @instance.object = value }.not_to raise_error
+       #  expect { @instance.status = value }.not_to raise_error
        #end
     end
   end
 
-  describe 'test attribute "id"' do
+  describe 'test attribute "owners"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "net_liquidation"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "gross_position"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "total_deposits"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "total_withdrawals"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "created_at"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "updated_at"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

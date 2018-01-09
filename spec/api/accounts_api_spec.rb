@@ -37,7 +37,7 @@ describe 'AccountsApi' do
   # Open a new account for a client
   # @param account 
   # @param [Hash] opts the optional parameters
-  # @return [Account]
+  # @return [AccountCreatedResponse]
   describe 'create_account test' do
     it "should work" do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

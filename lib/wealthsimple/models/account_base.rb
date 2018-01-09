@@ -19,15 +19,12 @@ module Wealthsimple
 
     attr_accessor :nickname
 
-    attr_accessor :base_currency
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'type' => :'type',
-        :'nickname' => :'nickname',
-        :'base_currency' => :'base_currency'
+        :'nickname' => :'nickname'
       }
     end
 
@@ -35,8 +32,7 @@ module Wealthsimple
     def self.swagger_types
       {
         :'type' => :'AccountType',
-        :'nickname' => :'String',
-        :'base_currency' => :'Currency'
+        :'nickname' => :'String'
       }
     end
 
@@ -54,10 +50,6 @@ module Wealthsimple
 
       if attributes.has_key?(:'nickname')
         self.nickname = attributes[:'nickname']
-      end
-
-      if attributes.has_key?(:'base_currency')
-        self.base_currency = attributes[:'base_currency']
       end
 
     end
@@ -81,8 +73,7 @@ module Wealthsimple
       return true if self.equal?(o)
       self.class == o.class &&
           type == o.type &&
-          nickname == o.nickname &&
-          base_currency == o.base_currency
+          nickname == o.nickname
     end
 
     # @see the `==` method
@@ -94,7 +85,7 @@ module Wealthsimple
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, nickname, base_currency].hash
+      [type, nickname].hash
     end
 
     # Builds the object from hash

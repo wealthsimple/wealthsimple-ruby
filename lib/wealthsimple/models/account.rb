@@ -21,10 +21,22 @@ module Wealthsimple
 
     attr_accessor :base_currency
 
-    # describes the object type of this entity
-    attr_accessor :object
+    # Status of the account
+    attr_accessor :status
 
-    attr_accessor :id
+    attr_accessor :owners
+
+    attr_accessor :net_liquidation
+
+    attr_accessor :gross_position
+
+    attr_accessor :total_deposits
+
+    attr_accessor :total_withdrawals
+
+    attr_accessor :created_at
+
+    attr_accessor :updated_at
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -54,8 +66,14 @@ module Wealthsimple
         :'type' => :'type',
         :'nickname' => :'nickname',
         :'base_currency' => :'base_currency',
-        :'object' => :'object',
-        :'id' => :'id'
+        :'status' => :'status',
+        :'owners' => :'owners',
+        :'net_liquidation' => :'net_liquidation',
+        :'gross_position' => :'gross_position',
+        :'total_deposits' => :'total_deposits',
+        :'total_withdrawals' => :'total_withdrawals',
+        :'created_at' => :'created_at',
+        :'updated_at' => :'updated_at'
       }
     end
 
@@ -65,8 +83,14 @@ module Wealthsimple
         :'type' => :'AccountType',
         :'nickname' => :'String',
         :'base_currency' => :'Currency',
-        :'object' => :'String',
-        :'id' => :'AccountId'
+        :'status' => :'String',
+        :'owners' => :'AccountOwners',
+        :'net_liquidation' => :'NetLiquidation',
+        :'gross_position' => :'GrossPosition',
+        :'total_deposits' => :'TotalDeposits',
+        :'total_withdrawals' => :'TotalWithdrawals',
+        :'created_at' => :'AccountCreatedAt',
+        :'updated_at' => :'AccountUpdatedAt'
       }
     end
 
@@ -90,12 +114,36 @@ module Wealthsimple
         self.base_currency = attributes[:'base_currency']
       end
 
-      if attributes.has_key?(:'object')
-        self.object = attributes[:'object']
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'owners')
+        self.owners = attributes[:'owners']
+      end
+
+      if attributes.has_key?(:'net_liquidation')
+        self.net_liquidation = attributes[:'net_liquidation']
+      end
+
+      if attributes.has_key?(:'gross_position')
+        self.gross_position = attributes[:'gross_position']
+      end
+
+      if attributes.has_key?(:'total_deposits')
+        self.total_deposits = attributes[:'total_deposits']
+      end
+
+      if attributes.has_key?(:'total_withdrawals')
+        self.total_withdrawals = attributes[:'total_withdrawals']
+      end
+
+      if attributes.has_key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.has_key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
       end
 
     end
@@ -110,19 +158,19 @@ module Wealthsimple
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      object_validator = EnumAttributeValidator.new('String', ["account"])
-      return false unless object_validator.valid?(@object)
+      status_validator = EnumAttributeValidator.new('String', ["open", "closed"])
+      return false unless status_validator.valid?(@status)
       return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["account"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for 'object', must be one of #{validator.allowable_values}."
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["open", "closed"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for 'status', must be one of #{validator.allowable_values}."
       end
-      @object = object
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -133,8 +181,14 @@ module Wealthsimple
           type == o.type &&
           nickname == o.nickname &&
           base_currency == o.base_currency &&
-          object == o.object &&
-          id == o.id
+          status == o.status &&
+          owners == o.owners &&
+          net_liquidation == o.net_liquidation &&
+          gross_position == o.gross_position &&
+          total_deposits == o.total_deposits &&
+          total_withdrawals == o.total_withdrawals &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -146,7 +200,7 @@ module Wealthsimple
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, nickname, base_currency, object, id].hash
+      [type, nickname, base_currency, status, owners, net_liquidation, gross_position, total_deposits, total_withdrawals, created_at, updated_at].hash
     end
 
     # Builds the object from hash
