@@ -35,9 +35,8 @@ describe 'TransactionsApi' do
   # unit tests for list_transactions
   # 
   #  Lists all Transactions. The number of Transactions can be potentially prohibitively large, the results are paginated.  By default, the API will return the 250 latest transactions in the last 30 days. 
+  # @param account_id The &#x60;id&#x60; of the Account entity.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :client_id The &#x60;id&#x60; of the Client entity. A &#x60;client_id&#x60; can be a &#x60;person_id&#x60;, &#x60;trust_id&#x60; or &#x60;corporation_id&#x60;
-  # @option opts [String] :account_id The &#x60;id&#x60; of the Account entity.
   # @option opts [Float] :offset The zero-based index of the first result to return
   # @option opts [Float] :limit The maximum number of results to return per page.
   # @option opts [String] :sort_by Attribute to sort results by.

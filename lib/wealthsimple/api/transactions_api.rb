@@ -22,28 +22,26 @@ module Wealthsimple
 
     # 
     #  Lists all Transactions. The number of Transactions can be potentially prohibitively large, the results are paginated.  By default, the API will return the 250 latest transactions in the last 30 days. 
+    # @param account_id The &#x60;id&#x60; of the Account entity.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :client_id The &#x60;id&#x60; of the Client entity. A &#x60;client_id&#x60; can be a &#x60;person_id&#x60;, &#x60;trust_id&#x60; or &#x60;corporation_id&#x60;
-    # @option opts [String] :account_id The &#x60;id&#x60; of the Account entity.
     # @option opts [Float] :offset The zero-based index of the first result to return (default to 0)
     # @option opts [Float] :limit The maximum number of results to return per page. (default to 25)
     # @option opts [String] :sort_by Attribute to sort results by.
     # @option opts [String] :sort_order The sort direction of the results. (default to desc)
-    # @option opts [String] :effective_date_start Limits the results returned to only those with an &#x60;effective_date&#x60; equal or after this date. (default to 30.days.ago)
+    # @option opts [String] :effective_date_start Limits the results returned to only those with an &#x60;effective_date&#x60; equal or after this date. (default to 30 days ago from today)
     # @option opts [String] :effective_date_end Limits the results returned to only those with an &#x60;effective_date&#x60; not greater than this date. (default to today)
-    # @option opts [String] :process_date_start Limits the results returned to only those with an &#x60;process_date&#x60; equal or after this date. (default to 30.days.ago)
+    # @option opts [String] :process_date_start Limits the results returned to only those with an &#x60;process_date&#x60; equal or after this date. (default to 30 days ago from today)
     # @option opts [String] :process_date_end Limits the results returned to only those with an &#x60;process_date&#x60; not greater than this date. (default to today)
     # @return [TransactionsPaginated]
-    def list_transactions(opts = {})
-      data, _status_code, _headers = list_transactions_with_http_info(opts)
+    def list_transactions(account_id, opts = {})
+      data, _status_code, _headers = list_transactions_with_http_info(account_id, opts)
       return data
     end
 
     # 
     #  Lists all Transactions. The number of Transactions can be potentially prohibitively large, the results are paginated.  By default, the API will return the 250 latest transactions in the last 30 days. 
+    # @param account_id The &#x60;id&#x60; of the Account entity.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :client_id The &#x60;id&#x60; of the Client entity. A &#x60;client_id&#x60; can be a &#x60;person_id&#x60;, &#x60;trust_id&#x60; or &#x60;corporation_id&#x60;
-    # @option opts [String] :account_id The &#x60;id&#x60; of the Account entity.
     # @option opts [Float] :offset The zero-based index of the first result to return
     # @option opts [Float] :limit The maximum number of results to return per page.
     # @option opts [String] :sort_by Attribute to sort results by.
@@ -53,9 +51,13 @@ module Wealthsimple
     # @option opts [String] :process_date_start Limits the results returned to only those with an &#x60;process_date&#x60; equal or after this date.
     # @option opts [String] :process_date_end Limits the results returned to only those with an &#x60;process_date&#x60; not greater than this date.
     # @return [Array<(TransactionsPaginated, Fixnum, Hash)>] TransactionsPaginated data, response status code and response headers
-    def list_transactions_with_http_info(opts = {})
+    def list_transactions_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: TransactionsApi.list_transactions ..."
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TransactionsApi.list_transactions"
       end
       if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
         fail ArgumentError, 'invalid value for "opts[:"offset"]" when calling TransactionsApi.list_transactions, must be greater than or equal to 0.'
@@ -77,8 +79,7 @@ module Wealthsimple
 
       # query parameters
       query_params = {}
-      query_params[:'client_id'] = opts[:'client_id'] if !opts[:'client_id'].nil?
-      query_params[:'account_id'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'account_id'] = account_id
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'sort_by'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?

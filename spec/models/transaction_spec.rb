@@ -32,7 +32,35 @@ describe 'Transaction' do
       expect(@instance).to be_instance_of(Wealthsimple::Transaction)
     end
   end
+  describe 'test attribute "object"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+       #validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["transaction"])
+       #validator.allowable_values.each do |value|
+       #  expect { @instance.object = value }.not_to raise_error
+       #end
+    end
+  end
+
   describe 'test attribute "id"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "account_id"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "symbol"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "country_code"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -44,7 +72,7 @@ describe 'Transaction' do
     end
   end
 
-  describe 'test attribute "asset"' do
+  describe 'test attribute "description"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
