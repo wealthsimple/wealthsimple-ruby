@@ -61,7 +61,7 @@ module Wealthsimple
 
       # http body (model)
       post_body = @api_client.object_to_http_body(person)
-      auth_names = []
+      auth_names = ['Bearer']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -116,7 +116,7 @@ module Wealthsimple
 
       # http body (model)
       post_body = nil
-      auth_names = []
+      auth_names = ['Bearer']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -210,7 +210,7 @@ module Wealthsimple
 
       # http body (model)
       post_body = nil
-      auth_names = []
+      auth_names = ['Bearer']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -272,7 +272,7 @@ module Wealthsimple
 
       # http body (model)
       post_body = @api_client.object_to_http_body(person)
-      auth_names = []
+      auth_names = ['Bearer']
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

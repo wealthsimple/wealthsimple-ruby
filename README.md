@@ -52,6 +52,14 @@ Please follow the [installation](#installation) procedure and then run the follo
 # Load the gem
 require 'wealthsimple'
 
+# Setup authorization
+Wealthsimple.configure do |config|
+  # Configure API key authorization: Bearer
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
 api_instance = Wealthsimple::AccountsApi.new
 
 account = Wealthsimple::AccountInput.new # AccountInput | 
@@ -327,5 +335,10 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Authorization
 
- All endpoints do not require authorization.
+
+### Bearer
+
+- **Type**: API key
+- **API key parameter name**: Authorization
+- **Location**: HTTP header
 
