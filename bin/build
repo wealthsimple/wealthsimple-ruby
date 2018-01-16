@@ -10,6 +10,7 @@ rm -rf spec/models
 swagger-codegen generate \
  -i https://api.sandbox.wealthsimple.com/v1/swagger.json \
  -l ruby \
+ -t custom-templates \
  -o . \
  --config config.json
 
