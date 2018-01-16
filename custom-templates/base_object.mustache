@@ -55,8 +55,12 @@
           end
         end
       else # model
-        temp_model = {{moduleName}}.const_get(type).new
-        temp_model.build_from_hash(value)
+        if value.is_a?(Hash)
+          temp_model = {{moduleName}}.const_get(type).new
+          temp_model.build_from_hash(value)
+        else
+          value
+        end
       end
     end
 
