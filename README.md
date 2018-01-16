@@ -1,4 +1,4 @@
-# wealthsimple
+# wealthsimple [![CircleCI](https://circleci.com/gh/wealthsimple/wealthsimple-ruby.svg?style=svg&circle-token=b94b7527d2ba8159eac856f679d7b7bf2fbea7be)](https://circleci.com/gh/wealthsimple/wealthsimple-ruby)
 
 Wealthsimple - the Ruby gem for the Wealthsimple API
 
