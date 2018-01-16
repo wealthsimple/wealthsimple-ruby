@@ -206,12 +206,8 @@ module Wealthsimple
           end
         end
       else # model
-        if value.is_a?(Hash)
-          temp_model = Wealthsimple.const_get(type).new
-          temp_model.build_from_hash(value)
-        else
-          value
-        end
+        temp_model = Wealthsimple.const_get(type).new
+        temp_model.build_from_hash(value)
       end
     end
 

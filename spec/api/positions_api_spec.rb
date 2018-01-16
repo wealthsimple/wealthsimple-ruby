@@ -35,13 +35,10 @@ describe 'PositionsApi' do
   # unit tests for list_positions
   # 
   # Returns positions for a given account. This API will also allow you to retrieve historical Positions held on a given date.
+  # @param account_id The &#x60;id&#x60; of the Account entity.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :client_id The &#x60;id&#x60; of the Client entity. A &#x60;client_id&#x60; can be a &#x60;person_id&#x60;, &#x60;trust_id&#x60; or &#x60;corporation_id&#x60;
-  # @option opts [String] :account_id The &#x60;id&#x60; of the Account entity.
   # @option opts [Float] :offset The zero-based index of the first result to return
   # @option opts [Float] :limit The maximum number of results to return per page.
-  # @option opts [String] :sort_by Attribute to sort results by.
-  # @option opts [String] :sort_order The sort direction of the results.
   # @option opts [Date] :date Specify a date if you wish to retrieve a historical position for this account. If not provided, the current (latest) positions are returned.
   # @return [PositionsPaginated]
   describe 'list_positions test' do

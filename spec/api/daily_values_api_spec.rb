@@ -34,10 +34,13 @@ describe 'DailyValuesApi' do
 
   # unit tests for list_daily_values
   # 
-  #  Returns historical daily values for a given account. This API will only return a maximum of 365 days worth of daily values from a given start date.  By default, it will return historical values for the last 30-days. The &#x60;start&#x60; date must occur before the &#x60;end&#x60; date if provided.  If the difference between the &#x60;start&#x60; date and the &#x60;end&#x60; date exceeds 365 days, an error will be thrown.
+  #  Returns historical daily values for a given account. This API will only return a maximum of 365 days worth of daily values from a given start date.  By default, it will return historical values for the last 30-days. The &#x60;start&#x60; date must occur before the &#x60;end&#x60; date if provided.  If the difference between the &#x60;start&#x60; date and the &#x60;end&#x60; date exceeds 365 days, an error will be thrown. The number of Daily Values can be potentially prohibitively large, the results are paginated. 
+  # @param account_id The &#x60;id&#x60; of the Account entity.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :client_id The &#x60;id&#x60; of the Client entity. A &#x60;client_id&#x60; can be a &#x60;person_id&#x60;, &#x60;trust_id&#x60; or &#x60;corporation_id&#x60;
-  # @option opts [String] :account_id The &#x60;id&#x60; of the Account entity.
+  # @option opts [Float] :offset The zero-based index of the first result to return
+  # @option opts [Float] :limit The maximum number of results to return per page.
+  # @option opts [Float] :offset2 The zero-based index of the first result to return
+  # @option opts [Float] :limit2 The maximum number of results to return per page.
   # @option opts [Date] :summary_date_start The date of the first daily_value in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601) format (i.e. YYYY-MM-DD), if not provided, defaults to 30-days ago.
   # @option opts [Date] :summary_date_end The date of the last daily_value in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601) format (i.e. YYYY-MM-DD), if not provided, defaults to today.
   # @return [DailyValuesPaginated]

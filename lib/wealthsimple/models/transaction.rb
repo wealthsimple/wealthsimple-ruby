@@ -15,11 +15,22 @@ require 'date'
 module Wealthsimple
 
   class Transaction
+    # describes the object type of this entity
+    attr_accessor :object
+
     attr_accessor :id
+
+    attr_accessor :account_id
+
+    # The stock exchange symbol or unique identifier
+    attr_accessor :symbol
+
+    attr_accessor :country_code
 
     attr_accessor :type
 
-    attr_accessor :asset
+    # Description of activity
+    attr_accessor :description
 
     # The change in the number of units held of the Asset in the Account
     attr_accessor :quantity
@@ -43,13 +54,38 @@ module Wealthsimple
 
     attr_accessor :effective_date
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'object' => :'object',
         :'id' => :'id',
+        :'account_id' => :'account_id',
+        :'symbol' => :'symbol',
+        :'country_code' => :'country_code',
         :'type' => :'type',
-        :'asset' => :'asset',
+        :'description' => :'description',
         :'quantity' => :'quantity',
         :'fx_rate' => :'fx_rate',
         :'market_value' => :'market_value',
@@ -66,9 +102,13 @@ module Wealthsimple
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'object' => :'String',
         :'id' => :'TransactionId',
+        :'account_id' => :'AccountId',
+        :'symbol' => :'String',
+        :'country_code' => :'CountryCode',
         :'type' => :'TransactionType',
-        :'asset' => :'Asset',
+        :'description' => :'String',
         :'quantity' => :'Float',
         :'fx_rate' => :'Float',
         :'market_value' => :'MarketValue',
@@ -90,16 +130,32 @@ module Wealthsimple
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
+      if attributes.has_key?(:'object')
+        self.object = attributes[:'object']
+      end
+
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      end
+
+      if attributes.has_key?(:'symbol')
+        self.symbol = attributes[:'symbol']
+      end
+
+      if attributes.has_key?(:'country_code')
+        self.country_code = attributes[:'country_code']
       end
 
       if attributes.has_key?(:'type')
         self.type = attributes[:'type']
       end
 
-      if attributes.has_key?(:'asset')
-        self.asset = attributes[:'asset']
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
       end
 
       if attributes.has_key?(:'quantity')
@@ -154,7 +210,19 @@ module Wealthsimple
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      object_validator = EnumAttributeValidator.new('String', ["transaction"])
+      return false unless object_validator.valid?(@object)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      validator = EnumAttributeValidator.new('String', ["transaction"])
+      unless validator.valid?(object)
+        fail ArgumentError, "invalid value for 'object', must be one of #{validator.allowable_values}."
+      end
+      @object = object
     end
 
     # Checks equality by comparing each attribute.
@@ -162,9 +230,13 @@ module Wealthsimple
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          object == o.object &&
           id == o.id &&
+          account_id == o.account_id &&
+          symbol == o.symbol &&
+          country_code == o.country_code &&
           type == o.type &&
-          asset == o.asset &&
+          description == o.description &&
           quantity == o.quantity &&
           fx_rate == o.fx_rate &&
           market_value == o.market_value &&
@@ -186,7 +258,7 @@ module Wealthsimple
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, type, asset, quantity, fx_rate, market_value, market_price, book_value, adjusted_book_value, net_cash, contribution_value, process_date, effective_date].hash
+      [object, id, account_id, symbol, country_code, type, description, quantity, fx_rate, market_value, market_price, book_value, adjusted_book_value, net_cash, contribution_value, process_date, effective_date].hash
     end
 
     # Builds the object from hash

@@ -21,37 +21,74 @@ module Wealthsimple
     end
 
     # 
-    #  Returns historical daily values for a given account. This API will only return a maximum of 365 days worth of daily values from a given start date.  By default, it will return historical values for the last 30-days. The `start` date must occur before the `end` date if provided.  If the difference between the `start` date and the `end` date exceeds 365 days, an error will be thrown.
+    #  Returns historical daily values for a given account. This API will only return a maximum of 365 days worth of daily values from a given start date.  By default, it will return historical values for the last 30-days. The `start` date must occur before the `end` date if provided.  If the difference between the `start` date and the `end` date exceeds 365 days, an error will be thrown. The number of Daily Values can be potentially prohibitively large, the results are paginated. 
+    # @param account_id The &#x60;id&#x60; of the Account entity.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :client_id The &#x60;id&#x60; of the Client entity. A &#x60;client_id&#x60; can be a &#x60;person_id&#x60;, &#x60;trust_id&#x60; or &#x60;corporation_id&#x60;
-    # @option opts [String] :account_id The &#x60;id&#x60; of the Account entity.
+    # @option opts [Float] :offset The zero-based index of the first result to return (default to 0)
+    # @option opts [Float] :limit The maximum number of results to return per page. (default to 25)
+    # @option opts [Float] :offset2 The zero-based index of the first result to return (default to 0)
+    # @option opts [Float] :limit2 The maximum number of results to return per page. (default to 25)
     # @option opts [Date] :summary_date_start The date of the first daily_value in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601) format (i.e. YYYY-MM-DD), if not provided, defaults to 30-days ago.
     # @option opts [Date] :summary_date_end The date of the last daily_value in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601) format (i.e. YYYY-MM-DD), if not provided, defaults to today.
     # @return [DailyValuesPaginated]
-    def list_daily_values(opts = {})
-      data, _status_code, _headers = list_daily_values_with_http_info(opts)
+    def list_daily_values(account_id, opts = {})
+      data, _status_code, _headers = list_daily_values_with_http_info(account_id, opts)
       return data
     end
 
     # 
-    #  Returns historical daily values for a given account. This API will only return a maximum of 365 days worth of daily values from a given start date.  By default, it will return historical values for the last 30-days. The &#x60;start&#x60; date must occur before the &#x60;end&#x60; date if provided.  If the difference between the &#x60;start&#x60; date and the &#x60;end&#x60; date exceeds 365 days, an error will be thrown.
+    #  Returns historical daily values for a given account. This API will only return a maximum of 365 days worth of daily values from a given start date.  By default, it will return historical values for the last 30-days. The &#x60;start&#x60; date must occur before the &#x60;end&#x60; date if provided.  If the difference between the &#x60;start&#x60; date and the &#x60;end&#x60; date exceeds 365 days, an error will be thrown. The number of Daily Values can be potentially prohibitively large, the results are paginated. 
+    # @param account_id The &#x60;id&#x60; of the Account entity.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :client_id The &#x60;id&#x60; of the Client entity. A &#x60;client_id&#x60; can be a &#x60;person_id&#x60;, &#x60;trust_id&#x60; or &#x60;corporation_id&#x60;
-    # @option opts [String] :account_id The &#x60;id&#x60; of the Account entity.
+    # @option opts [Float] :offset The zero-based index of the first result to return
+    # @option opts [Float] :limit The maximum number of results to return per page.
+    # @option opts [Float] :offset2 The zero-based index of the first result to return
+    # @option opts [Float] :limit2 The maximum number of results to return per page.
     # @option opts [Date] :summary_date_start The date of the first daily_value in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601) format (i.e. YYYY-MM-DD), if not provided, defaults to 30-days ago.
     # @option opts [Date] :summary_date_end The date of the last daily_value in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601) format (i.e. YYYY-MM-DD), if not provided, defaults to today.
     # @return [Array<(DailyValuesPaginated, Fixnum, Hash)>] DailyValuesPaginated data, response status code and response headers
-    def list_daily_values_with_http_info(opts = {})
+    def list_daily_values_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: DailyValuesApi.list_daily_values ..."
       end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling DailyValuesApi.list_daily_values"
+      end
+      if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"offset"]" when calling DailyValuesApi.list_daily_values, must be greater than or equal to 0.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 250
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling DailyValuesApi.list_daily_values, must be smaller than or equal to 250.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling DailyValuesApi.list_daily_values, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'offset2'].nil? && opts[:'offset2'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"offset2"]" when calling DailyValuesApi.list_daily_values, must be greater than or equal to 0.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit2'].nil? && opts[:'limit2'] > 250
+        fail ArgumentError, 'invalid value for "opts[:"limit2"]" when calling DailyValuesApi.list_daily_values, must be smaller than or equal to 250.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit2'].nil? && opts[:'limit2'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit2"]" when calling DailyValuesApi.list_daily_values, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = "/daily_values"
 
       # query parameters
       query_params = {}
-      query_params[:'client_id'] = opts[:'client_id'] if !opts[:'client_id'].nil?
-      query_params[:'account_id'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'account_id'] = account_id
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'offset'] = opts[:'offset2'] if !opts[:'offset2'].nil?
+      query_params[:'limit'] = opts[:'limit2'] if !opts[:'limit2'].nil?
       query_params[:'summary_date_start'] = opts[:'summary_date_start'] if !opts[:'summary_date_start'].nil?
       query_params[:'summary_date_end'] = opts[:'summary_date_end'] if !opts[:'summary_date_end'].nil?
 
