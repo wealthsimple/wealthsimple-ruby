@@ -3,8 +3,6 @@ require 'date'
 module Wealthsimple
 
   class TaxDetail
-    attr_accessor :id
-
     attr_accessor :gross_amount
 
     attr_accessor :base_gross_amount
@@ -43,7 +41,6 @@ module Wealthsimple
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
         :'gross_amount' => :'gross_amount',
         :'base_gross_amount' => :'base_gross_amount',
         :'excess_gross_amount' => :'excess_gross_amount',
@@ -67,7 +64,6 @@ module Wealthsimple
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'TaxDetailId',
         :'gross_amount' => :'Money',
         :'base_gross_amount' => :'Money',
         :'excess_gross_amount' => :'Money',
@@ -95,10 +91,6 @@ module Wealthsimple
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
 
       if attributes.has_key?(:'gross_amount')
         self.gross_amount = attributes[:'gross_amount']
@@ -188,7 +180,6 @@ module Wealthsimple
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
           gross_amount == o.gross_amount &&
           base_gross_amount == o.base_gross_amount &&
           excess_gross_amount == o.excess_gross_amount &&
@@ -217,7 +208,7 @@ module Wealthsimple
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, gross_amount, base_gross_amount, excess_gross_amount, net_amount, tax_override_percentage, federal_tax_amount, federal_tax_percentage, provincial_tax_amount, provincial_tax_percentage, province, country, account_type, person_or_spouse_age, account_market_value, account_market_value_previous_year, tax_year, document_url].hash
+      [gross_amount, base_gross_amount, excess_gross_amount, net_amount, tax_override_percentage, federal_tax_amount, federal_tax_percentage, provincial_tax_amount, provincial_tax_percentage, province, country, account_type, person_or_spouse_age, account_market_value, account_market_value_previous_year, tax_year, document_url].hash
     end
 
     # Builds the object from hash

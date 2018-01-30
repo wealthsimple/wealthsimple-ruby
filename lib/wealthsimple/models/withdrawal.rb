@@ -17,6 +17,9 @@ module Wealthsimple
 
     attr_accessor :updated_at
 
+    # describes the object type of this entity
+    attr_accessor :object
+
     attr_accessor :id
 
     attr_accessor :type
@@ -33,6 +36,27 @@ module Wealthsimple
 
     attr_accessor :tax_detail
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -44,6 +68,7 @@ module Wealthsimple
         :'external_id' => :'external_id',
         :'created_at' => :'created_at',
         :'updated_at' => :'updated_at',
+        :'object' => :'object',
         :'id' => :'id',
         :'type' => :'type',
         :'status' => :'status',
@@ -65,6 +90,7 @@ module Wealthsimple
         :'external_id' => :'ExternalId',
         :'created_at' => :'CreatedAt',
         :'updated_at' => :'UpdatedAt',
+        :'object' => :'String',
         :'id' => :'FundsTransferId',
         :'type' => :'FundsTransferType',
         :'status' => :'FundsTransferStatus',
@@ -110,6 +136,10 @@ module Wealthsimple
 
       if attributes.has_key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
+      end
+
+      if attributes.has_key?(:'object')
+        self.object = attributes[:'object']
       end
 
       if attributes.has_key?(:'id')
@@ -171,7 +201,19 @@ module Wealthsimple
       return false if @bank_account_id.nil?
       return false if @account_id.nil?
       return false if @value.nil?
+      object_validator = EnumAttributeValidator.new('String', ["withdrawal"])
+      return false unless object_validator.valid?(@object)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      validator = EnumAttributeValidator.new('String', ["withdrawal"])
+      unless validator.valid?(object)
+        fail ArgumentError, "invalid value for 'object', must be one of #{validator.allowable_values}."
+      end
+      @object = object
     end
 
     # Checks equality by comparing each attribute.
@@ -186,6 +228,7 @@ module Wealthsimple
           external_id == o.external_id &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
+          object == o.object &&
           id == o.id &&
           type == o.type &&
           status == o.status &&
@@ -205,7 +248,7 @@ module Wealthsimple
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [bank_account_id, account_id, value, post_dated, external_id, created_at, updated_at, id, type, status, funds_transfer_schedule_id, reject_reason, withdrawal_type, withdrawal_reason, tax_detail].hash
+      [bank_account_id, account_id, value, post_dated, external_id, created_at, updated_at, object, id, type, status, funds_transfer_schedule_id, reject_reason, withdrawal_type, withdrawal_reason, tax_detail].hash
     end
 
     # Builds the object from hash

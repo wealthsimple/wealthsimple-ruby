@@ -299,7 +299,7 @@ module Wealthsimple
     # Returns a withdrawal
     # @param funds_transfer_id The &#x60;id&#x60; of the Funds Transfer entity.
     # @param [Hash] opts the optional parameters
-    # @return [WithdrawalWithEvents]
+    # @return [Withdrawal]
     def get_withdrawal(funds_transfer_id, opts = {})
       data, _status_code, _headers = get_withdrawal_with_http_info(funds_transfer_id, opts)
       return data
@@ -309,7 +309,7 @@ module Wealthsimple
     # Returns a withdrawal
     # @param funds_transfer_id The &#x60;id&#x60; of the Funds Transfer entity.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(WithdrawalWithEvents, Fixnum, Hash)>] WithdrawalWithEvents data, response status code and response headers
+    # @return [Array<(Withdrawal, Fixnum, Hash)>] Withdrawal data, response status code and response headers
     def get_withdrawal_with_http_info(funds_transfer_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: FundingApi.get_withdrawal ..."
@@ -343,7 +343,7 @@ module Wealthsimple
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'WithdrawalWithEvents')
+        :return_type => 'Withdrawal')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: FundingApi#get_withdrawal\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -440,7 +440,7 @@ module Wealthsimple
     # @option opts [String] :sort_by Attribute to sort results by.
     # @option opts [String] :sort_order The sort direction of the results. (default to desc)
     # @option opts [String] :account_id The &#x60;id&#x60; of the Account entity.
-    # @option opts [String] :start_date Limits the results returned to only those with a date equal or after this date. (default to 30.days.ago)
+    # @option opts [String] :start_date Limits the results returned to only those with a date equal or after this date. (default to 30 days ago)
     # @option opts [String] :end_date Limits the results returned to only those with a date not greater than this date. (default to today)
     # @return [DepositsPaginated]
     def list_deposits(opts = {})
@@ -525,7 +525,7 @@ module Wealthsimple
     # @option opts [String] :sort_by Attribute to sort results by.
     # @option opts [String] :sort_order The sort direction of the results. (default to desc)
     # @option opts [String] :account_id The &#x60;id&#x60; of the Account entity.
-    # @option opts [String] :start_date Limits the results returned to only those with a date equal or after this date. (default to 30.days.ago)
+    # @option opts [String] :start_date Limits the results returned to only those with a date equal or after this date. (default to 30 days ago)
     # @option opts [String] :end_date Limits the results returned to only those with a date not greater than this date. (default to today)
     # @return [WithdrawalsPaginated]
     def list_withdrawals(opts = {})

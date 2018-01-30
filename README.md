@@ -117,8 +117,10 @@ Class | Method | HTTP request | Description
  - [Wealthsimple::Assessment](docs/Assessment.md)
  - [Wealthsimple::Asset](docs/Asset.md)
  - [Wealthsimple::BankAccountBase](docs/BankAccountBase.md)
+ - [Wealthsimple::BankAccountCreatedAt](docs/BankAccountCreatedAt.md)
  - [Wealthsimple::BankAccountId](docs/BankAccountId.md)
  - [Wealthsimple::BankAccountType](docs/BankAccountType.md)
+ - [Wealthsimple::BankAccountUpdatedAt](docs/BankAccountUpdatedAt.md)
  - [Wealthsimple::Citizenship](docs/Citizenship.md)
  - [Wealthsimple::Citizenships](docs/Citizenships.md)
  - [Wealthsimple::ClientBase](docs/ClientBase.md)
@@ -249,6 +251,7 @@ Class | Method | HTTP request | Description
  - [Wealthsimple::CorporationsPaginated](docs/CorporationsPaginated.md)
  - [Wealthsimple::DailyValuesPaginated](docs/DailyValuesPaginated.md)
  - [Wealthsimple::DebitAccount](docs/DebitAccount.md)
+ - [Wealthsimple::DebitBankAccountsPaginated](docs/DebitBankAccountsPaginated.md)
  - [Wealthsimple::Deposit](docs/Deposit.md)
  - [Wealthsimple::DepositRequest](docs/DepositRequest.md)
  - [Wealthsimple::Deposits](docs/Deposits.md)
@@ -300,7 +303,6 @@ Class | Method | HTTP request | Description
  - [Wealthsimple::Trust](docs/Trust.md)
  - [Wealthsimple::TrustInput](docs/TrustInput.md)
  - [Wealthsimple::TrustUpdate](docs/TrustUpdate.md)
- - [Wealthsimple::WithdrawalWithEvents](docs/WithdrawalWithEvents.md)
 
 
 ## Documentation for Authorization
