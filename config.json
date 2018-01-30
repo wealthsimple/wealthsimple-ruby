@@ -1,3 +1,4 @@
 {
-  "gemName": "wealthsimple"
+  "gemName": "wealthsimple",
+  "hideGenerationTimestamp": false
 }
