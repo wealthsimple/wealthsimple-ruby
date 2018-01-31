@@ -84,7 +84,7 @@ module Wealthsimple
     # @option opts [Float] :limit The maximum number of results to return per page. (default to 25)
     # @option opts [String] :sort_by Attribute to sort results by.
     # @option opts [String] :sort_order The sort direction of the results. (default to desc)
-    # @option opts [String] :start_date Limits the results returned to only those with a date equal or after this date. (default to 30.days.ago)
+    # @option opts [String] :start_date Limits the results returned to only those with a date equal or after this date. (default to 30 days ago)
     # @option opts [String] :end_date Limits the results returned to only those with a date not greater than this date. (default to today)
     # @return [Array<AccountTransfersPaginated>]
     def list_account_transfers(opts = {})

@@ -8,8 +8,9 @@ rm -rf spec/api
 rm -rf spec/models
 
 swagger-codegen generate \
- -i https://api.sandbox.wealthsimple.com/v1/swagger.json \
- -l ruby \
- -t custom-templates \
- -o . \
- --config config.json
+ --input-spec https://api.sandbox.wealthsimple.com/v1/swagger.json \
+ --output . \
+ --lang ruby \
+ --template-dir swagger/templates \
+ --ignore-file-override swagger/.swagger-codegen-ignore  \
+ --config swagger/config.json

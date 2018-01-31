@@ -1,57 +1,18 @@
 require 'date'
 
 module Wealthsimple
-
-  class BankAccountWithFundableAccounts
-    attr_accessor :type
-
-    # If the Bank Account is a corporate bank account, it will only be able to fund corporate trading accounts and vice-versa.
-    attr_accessor :corporate
-
-    attr_accessor :jursidiction
-
-    # A user-defined (free-form) name for the Bank Account.
-    attr_accessor :account_name
-
-    attr_accessor :institution_number
-
-    attr_accessor :created_at
-
-    attr_accessor :udpated_at
-
-    # The encrypted account_number
-    attr_accessor :account_number
-
-    attr_accessor :owners
-
+  # Timestamp when the bank account was created
+  class BankAccountCreatedAt
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'corporate' => :'corporate',
-        :'jursidiction' => :'jursidiction',
-        :'account_name' => :'account_name',
-        :'institution_number' => :'institution_number',
-        :'created_at' => :'created_at',
-        :'udpated_at' => :'udpated_at',
-        :'account_number' => :'account_number',
-        :'owners' => :'owners'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'type' => :'BankAccountType',
-        :'corporate' => :'BOOLEAN',
-        :'jursidiction' => :'CountryCode',
-        :'account_name' => :'String',
-        :'institution_number' => :'InstitutionNumber',
-        :'created_at' => :'BankAccountCreatedAt',
-        :'udpated_at' => :'BankAccountUpdatedAt',
-        :'account_number' => :'String',
-        :'owners' => :'Array<ClientId>'
       }
     end
 
@@ -62,44 +23,6 @@ module Wealthsimple
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
-
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.has_key?(:'corporate')
-        self.corporate = attributes[:'corporate']
-      end
-
-      if attributes.has_key?(:'jursidiction')
-        self.jursidiction = attributes[:'jursidiction']
-      end
-
-      if attributes.has_key?(:'account_name')
-        self.account_name = attributes[:'account_name']
-      end
-
-      if attributes.has_key?(:'institution_number')
-        self.institution_number = attributes[:'institution_number']
-      end
-
-      if attributes.has_key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.has_key?(:'udpated_at')
-        self.udpated_at = attributes[:'udpated_at']
-      end
-
-      if attributes.has_key?(:'account_number')
-        self.account_number = attributes[:'account_number']
-      end
-
-      if attributes.has_key?(:'owners')
-        if (value = attributes[:'owners']).is_a?(Array)
-          self.owners = value
-        end
-      end
 
     end
 
@@ -120,16 +43,7 @@ module Wealthsimple
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
-      self.class == o.class &&
-          type == o.type &&
-          corporate == o.corporate &&
-          jursidiction == o.jursidiction &&
-          account_name == o.account_name &&
-          institution_number == o.institution_number &&
-          created_at == o.created_at &&
-          udpated_at == o.udpated_at &&
-          account_number == o.account_number &&
-          owners == o.owners
+      self.class == o.class
     end
 
     # @see the `==` method
@@ -141,7 +55,7 @@ module Wealthsimple
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, corporate, jursidiction, account_name, institution_number, created_at, udpated_at, account_number, owners].hash
+      [].hash
     end
 
     # Builds the object from hash

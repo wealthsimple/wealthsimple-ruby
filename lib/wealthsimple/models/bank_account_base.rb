@@ -5,8 +5,6 @@ module Wealthsimple
   class BankAccountBase
     attr_accessor :type
 
-    attr_accessor :base_currency
-
     # If the Bank Account is a corporate bank account, it will only be able to fund corporate trading accounts and vice-versa.
     attr_accessor :corporate
 
@@ -17,19 +15,21 @@ module Wealthsimple
 
     attr_accessor :institution_number
 
-    attr_accessor :external_id
+    attr_accessor :created_at
+
+    attr_accessor :udpated_at
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'type' => :'type',
-        :'base_currency' => :'base_currency',
         :'corporate' => :'corporate',
         :'jursidiction' => :'jursidiction',
         :'account_name' => :'account_name',
         :'institution_number' => :'institution_number',
-        :'external_id' => :'external_id'
+        :'created_at' => :'created_at',
+        :'udpated_at' => :'udpated_at'
       }
     end
 
@@ -37,12 +37,12 @@ module Wealthsimple
     def self.swagger_types
       {
         :'type' => :'BankAccountType',
-        :'base_currency' => :'Currency',
         :'corporate' => :'BOOLEAN',
         :'jursidiction' => :'CountryCode',
         :'account_name' => :'String',
         :'institution_number' => :'InstitutionNumber',
-        :'external_id' => :'ExternalId'
+        :'created_at' => :'BankAccountCreatedAt',
+        :'udpated_at' => :'BankAccountUpdatedAt'
       }
     end
 
@@ -56,10 +56,6 @@ module Wealthsimple
 
       if attributes.has_key?(:'type')
         self.type = attributes[:'type']
-      end
-
-      if attributes.has_key?(:'base_currency')
-        self.base_currency = attributes[:'base_currency']
       end
 
       if attributes.has_key?(:'corporate')
@@ -78,8 +74,12 @@ module Wealthsimple
         self.institution_number = attributes[:'institution_number']
       end
 
-      if attributes.has_key?(:'external_id')
-        self.external_id = attributes[:'external_id']
+      if attributes.has_key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.has_key?(:'udpated_at')
+        self.udpated_at = attributes[:'udpated_at']
       end
 
     end
@@ -103,12 +103,12 @@ module Wealthsimple
       return true if self.equal?(o)
       self.class == o.class &&
           type == o.type &&
-          base_currency == o.base_currency &&
           corporate == o.corporate &&
           jursidiction == o.jursidiction &&
           account_name == o.account_name &&
           institution_number == o.institution_number &&
-          external_id == o.external_id
+          created_at == o.created_at &&
+          udpated_at == o.udpated_at
     end
 
     # @see the `==` method
@@ -120,7 +120,7 @@ module Wealthsimple
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, base_currency, corporate, jursidiction, account_name, institution_number, external_id].hash
+      [type, corporate, jursidiction, account_name, institution_number, created_at, udpated_at].hash
     end
 
     # Builds the object from hash
