@@ -1,6 +1,6 @@
 require 'uri'
 
-module Wealthsimple
+module {{moduleName}}
   class Configuration
     # Defines url scheme
     attr_accessor :scheme
@@ -116,9 +116,9 @@ module Wealthsimple
     attr_accessor :force_ending_format
 
     def initialize
-      @scheme = 'https'
-      @host = 'api.sandbox.wealthsimple.com'
-      @base_path = '/v1'
+      @scheme = '{{scheme}}'
+      @host = '{{host}}'
+      @base_path = '{{contextPath}}'
       @api_key = {}
       @api_key_prefix = {'Authorization' => 'Bearer'}
       @timeout = 0
@@ -184,13 +184,35 @@ module Wealthsimple
     # Returns Auth Settings hash for api client.
     def auth_settings
       {
-        'Bearer' =>
+{{#authMethods}}
+{{#isApiKey}}
+        '{{name}}' =>
           {
             type: 'api_key',
+            in: {{#isKeyInHeader}}'header'{{/isKeyInHeader}}{{#isKeyInQuery}}'query'{{/isKeyInQuery}},
+            key: '{{keyParamName}}',
+            value: api_key_with_prefix('{{keyParamName}}')
+          },
+{{/isApiKey}}
+{{#isBasic}}
+        '{{name}}' =>
+          {
+            type: 'basic',
             in: 'header',
             key: 'Authorization',
-            value: api_key_with_prefix('Authorization')
+            value: basic_auth_token
           },
+{{/isBasic}}
+{{#isOAuth}}
+        '{{name}}' =>
+          {
+            type: 'oauth2',
+            in: 'header',
+            key: 'Authorization',
+            value: "Bearer #{access_token}"
+          },
+{{/isOAuth}}
+{{/authMethods}}
       }
     end
   end
