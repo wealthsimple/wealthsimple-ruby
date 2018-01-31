@@ -4,8 +4,6 @@ require "pry"
 require "dotenv/load"
 
 Wealthsimple.configure do |config|
-  config.api_key_prefix['Authorization'] = 'Bearer'
-  config.scheme = "https"
   config.host = "api.sandbox.wealthsimple.com"
 end
 
