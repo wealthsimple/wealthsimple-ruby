@@ -12,5 +12,4 @@ swagger-codegen generate \
  --output . \
  --lang ruby \
  --template-dir swagger/templates \
- --ignore-file-override swagger/.swagger-codegen-ignore  \
  --config swagger/config.json
