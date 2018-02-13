@@ -8,13 +8,16 @@ Wealthsimple.configure do |config|
   config.api_version = :v1
   config.client_id = "<oauth_client_id>"
 
-  # Optional, depending on grant_type:
+  # Optional: Depending on grant_type may or may not be needed:
   config.client_secret = "<oauth_client_secret>"
 
-  # If available, you can optionally specify a previous auth response so that
-  # the user does not have to login again:
+  # Optional: If available, you can optionally specify a previous auth response 
+  # so that the user does not have to login again:
   config.auth = { ...prior server response... }
 end
+
+health = Wealthsimple.get("/healthcheck")
+pp health.resource
 
 auth = Wealthsimple.authenticate({
   "grant_type": "password",
