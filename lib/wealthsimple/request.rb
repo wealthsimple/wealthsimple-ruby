@@ -1,4 +1,11 @@
 module Wealthsimple
+# Define class methods for more succinct requests
+  %i(get post put delete head patch).each do |http_method|
+    define_singleton_method(http_method) do |path, headers: {}, query: {}, body: nil|
+      Request.new(method: http_method, path: path, headers: headers, query: query, body: body).execute
+    end
+  end
+
   class Request
     attr_reader :extra_attributes
     def initialize(method:, path:, headers: {}, query: {}, body: nil, **extra_attributes)
