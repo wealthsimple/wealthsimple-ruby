@@ -14,6 +14,14 @@ describe Wealthsimple::Response do
     its('resource.status') { is_expected.to eq('ok') }
     its('resource.messages') { is_expected.to eq([123, true]) }
 
+    describe "#[]" do
+      it "returns the value in the body for associated key" do
+        expect(response[:status]).to eq("ok")
+        expect(response["status"]).to eq("ok")
+        expect(response[:messages]).to eq([123, true])
+      end
+    end
+
     describe "#header" do
       it "returns header regardless of case" do
         expect(response.header("Content-Length")).to eq("35")
