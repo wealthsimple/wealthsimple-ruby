@@ -20,10 +20,10 @@ health = Wealthsimple.get("/healthcheck")
 pp health.resource
 
 auth = Wealthsimple.authenticate({
-  "grant_type": "password",
-  "scope": "read write",
-  "username": "peter@example.com",
-  "password": "abc123$",
+  grant_type: "password",
+  scope: "read write",
+  username: "peter@example.com",
+  password: "abc123$",
 })
 pp auth.resource
 
