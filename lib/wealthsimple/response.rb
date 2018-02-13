@@ -9,6 +9,7 @@ module Wealthsimple
       @parsed_body = parse_body(body)
       @resource = convert_to_resource(@parsed_body)
     end
+    delegate :[], to: :to_h
 
     def header(key)
       headers[key.downcase]
