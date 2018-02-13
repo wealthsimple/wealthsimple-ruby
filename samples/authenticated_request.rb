@@ -16,10 +16,7 @@ response = Wealthsimple.authenticate({
   "password": ENV["PASSWORD"],
   "scope": "read write",
 })
-
 pp response.resource
 
-access_token = response.resource.access_token
-
-user = Wealthsimple.get("/users/#{response.resource.resource_owner_id}", headers: { Authorization: "Bearer #{access_token}" })
+user = Wealthsimple.get("/users/#{response.resource.resource_owner_id}")
 pp user.resource

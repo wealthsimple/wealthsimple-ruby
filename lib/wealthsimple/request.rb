@@ -11,7 +11,9 @@ module Wealthsimple
       client_id: config.client_id,
       client_secret: config.client_secret,
     }.merge(oauth_details)
-    post("/oauth/token", { body: body })
+    response = post("/oauth/token", { body: body })
+    config.auth = response.to_h
+    response
   end
 
   class Request
@@ -24,7 +26,7 @@ module Wealthsimple
       @path = "#{@path}?#{query.to_param}" if query.present?
       @path = "/#{Wealthsimple.config.api_version}#{@path}"
       @body = body
-      @headers = default_headers.merge(headers)
+      @headers = headers
       @extra_attributes = extra_attributes || {}
     end
 
@@ -37,7 +39,7 @@ module Wealthsimple
         request_args = {
           url: @path,
           method: @method,
-          headers: @headers,
+          headers: headers,
           body: processed_request_body,
           timeout: 10,
         }.compact
@@ -59,12 +61,17 @@ module Wealthsimple
       "https://api.#{Wealthsimple.config.env}.wealthsimple.com"
     end
 
-    def default_headers
-      {
+    def headers
+      headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Date': Time.now.utc.httpdate,
-      }
+      }.merge(@headers)
+      # TODO: check auth expiration
+      if Wealthsimple.config.auth.present?
+        headers['Authorization'] = "Bearer #{Wealthsimple.config.auth['access_token']}"
+      end
+      headers
     end
 
     def processed_request_body
