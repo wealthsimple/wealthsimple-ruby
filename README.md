@@ -9,11 +9,11 @@ Wealthsimple.configure do |config|
   config.client_id = "<oauth_client_id>"
 
   # Optional, depending on grant_type:
-  # config.client_secret = "<oauth_client_secret>"
+  config.client_secret = "<oauth_client_secret>"
 
   # If available, you can optionally specify a previous auth response so that
   # the user does not have to login again:
-  # config.auth = { ...prior server response... }
+  config.auth = { ...prior server response... }
 end
 
 auth = Wealthsimple.authenticate({
