@@ -6,6 +6,14 @@ module Wealthsimple
     end
   end
 
+  def self.authenticate(oauth_details)
+    body = {
+      client_id: config.client_id,
+      client_secret: config.client_secret,
+    }.merge(oauth_details)
+    post("/oauth/token", { body: body })
+  end
+
   class Request
     attr_reader :extra_attributes
     def initialize(method:, path:, headers: {}, query: {}, body: nil, **extra_attributes)
