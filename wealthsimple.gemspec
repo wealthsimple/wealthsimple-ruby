@@ -6,21 +6,25 @@ Gem::Specification.new do |s|
   s.name        = "wealthsimple"
   s.version     = Wealthsimple::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Swagger-Codegen"]
+  s.authors     = [""]
   s.email       = [""]
   s.homepage    = "https://github.com/wealthsimple/wealthsimple-ruby"
   s.summary     = "Wealthsimple API client rubygem"
   s.description = "Client for interacting with the Wealthsimple Public API"
   s.license     = "MIT"
-  s.required_ruby_version = ">= 2.0"
+  s.required_ruby_version = ">= 2.3"
 
-  s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
-  s.add_runtime_dependency 'json', '~> 2.1', '>= 2.1.0'
+  s.add_runtime_dependency 'faraday'
+  s.add_runtime_dependency 'json'
+  s.add_runtime_dependency "activesupport"
+  s.add_runtime_dependency "recursive-open-struct"
+  s.add_runtime_dependency "rack", ">= 1.1" # used for query string parsing
 
-  s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
-  s.add_development_dependency 'vcr', '~> 3.0', '>= 3.0.1'
-  s.add_development_dependency 'webmock', '~> 1.24', '>= 1.24.3'
-  s.add_development_dependency 'pry'
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "rspec-its"
+  s.add_development_dependency "rspec-collection_matchers"
+  s.add_development_dependency "webmock"
+  s.add_development_dependency "pry"
   s.add_development_dependency 'dotenv'
   s.add_development_dependency 'bundler-audit'
 
