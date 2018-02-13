@@ -9,14 +9,13 @@ Wealthsimple.configure do |config|
   config.client_id = "58a99e4862a1b246a7745523ca230e61dd7feff351056fcb22c73a5d7a2fcd69"
 end
 
-
-response = Wealthsimple.authenticate({
+auth = Wealthsimple.authenticate({
   "grant_type": "password",
   "username": ENV["EMAIL"],
   "password": ENV["PASSWORD"],
   "scope": "read write",
 })
-pp response.resource
+pp auth.resource
 
-user = Wealthsimple.get("/users/#{response.resource.resource_owner_id}")
+user = Wealthsimple.get("/users/#{auth.resource.resource_owner_id}")
 pp user.resource
