@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = [""]
   s.email       = [""]
   s.homepage    = "https://github.com/wealthsimple/wealthsimple-ruby"
-  s.summary     = "Wealthsimple API client rubygem"
-  s.description = "Client for interacting with the Wealthsimple Public API"
+  s.summary     = "A Ruby client for the Wealthsimple API"
+  s.description = "Client for interacting with the Wealthsimple API"
   s.license     = "MIT"
   s.required_ruby_version = ">= 2.3"
 
