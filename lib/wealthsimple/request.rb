@@ -32,7 +32,6 @@ module Wealthsimple
 
     def execute
       connection = Faraday.new(url: base_url) do |faraday|
-        faraday.use Faraday::Response::RaiseError
         faraday.adapter Faraday.default_adapter
       end
       response = connection.send(@method) do |request|
@@ -52,7 +51,11 @@ module Wealthsimple
         end
         request
       end
-      Response.new(status: response.status, headers: response.headers, body: response.body)
+      response = Response.new(status: response.status, headers: response.headers, body: response.body)
+      if (400...600).include?(response.status)
+        raise ApiError.new(response)
+      end
+      response
     end
 
     private

@@ -6,6 +6,7 @@ require 'recursive-open-struct'
 
 require 'wealthsimple/version'
 require 'wealthsimple/configuration'
+require 'wealthsimple/errors'
 require 'wealthsimple/request'
 require 'wealthsimple/response'
 
