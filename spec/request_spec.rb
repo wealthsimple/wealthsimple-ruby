@@ -36,24 +36,50 @@ describe Wealthsimple::Request do
 
     describe "#execute (GET)" do
       subject { described_class.new(method: :get, path: "/accounts/123") }
+      let(:request) { stub_request(:get, "https://api.production.wealthsimple.com/v1/accounts/123") }
 
-      before(:each) do
-        stub_request(:get, "https://api.production.wealthsimple.com/v1/accounts/123").to_return(status: 200, body: '{"account": 123}')
+      context "with 200 OK response" do
+        before do
+          request.to_return(status: 200, body: '{"account": 123}')
+        end
+
+        it "makes the correct request" do
+          subject.execute
+          expect(WebMock).to have_requested(:get, "https://api.production.wealthsimple.com/v1/accounts/123")
+            .with({
+              body: nil,
+              headers: {'Content-Type' => 'application/json'},
+            }).once
+        end
+
+        it "returns the response" do
+          response = subject.execute
+          expect(response).to be_a(Wealthsimple::Response)
+          expect(response.resource.account).to eq(123)
+        end
       end
 
-      it "makes the correct request" do
-        subject.execute
-        expect(WebMock).to have_requested(:get, "https://api.production.wealthsimple.com/v1/accounts/123")
-          .with({
-            body: nil,
-            headers: {'Content-Type' => 'application/json'},
-          }).once
-      end
+      context "with 404 error response" do
+        before do
+          request.to_return(status: 404, body: '{"status":"not_found","code":404,"message":"Could not find User","reference_id":"3d1f4569-fe76-43e9-8051-d47016388d6b"}')
+        end
 
-      it "returns the response" do
-        response = subject.execute
-        expect(response).to be_a(Wealthsimple::Response)
-        expect(response.resource.account).to eq(123)
+        it "raises ApiError with response details" do
+          error_occurred = false
+
+          begin
+            subject.execute
+          rescue Wealthsimple::ApiError => e
+            error_occurred = true
+            expect(e.status).to eq(404)
+            expect(e.message).to eq('Could not find User')
+            expect(e.resource.message).to eq('Could not find User')
+            expect(e.resource.reference_id).to eq('3d1f4569-fe76-43e9-8051-d47016388d6b')
+            expect(e.to_h).to include({"message" => "Could not find User"})
+          end
+
+          expect(error_occurred).to be(true)
+        end
       end
     end
   end
