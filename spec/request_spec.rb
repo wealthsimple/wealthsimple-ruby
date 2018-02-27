@@ -72,6 +72,7 @@ describe Wealthsimple::Request do
           rescue Wealthsimple::ApiError => e
             error_occurred = true
             expect(e.status).to eq(404)
+            expect(e.message).to eq('Could not find User')
             expect(e.resource.message).to eq('Could not find User')
             expect(e.resource.reference_id).to eq('3d1f4569-fe76-43e9-8051-d47016388d6b')
             expect(e.to_h).to include({"message" => "Could not find User"})
