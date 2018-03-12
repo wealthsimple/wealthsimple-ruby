@@ -11,7 +11,7 @@ Add the following to your `Gemfile` and run `bundle install`:
 gem 'wealthsimple', git: 'https://github.com/wealthsimple/wealthsimple-ruby.git'
 ```
 
-### Example Usage
+### Example usage
 
 See [samples directory](./samples) for a wide range of samples, or see the basic example below:
 
