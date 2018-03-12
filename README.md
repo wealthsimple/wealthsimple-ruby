@@ -2,6 +2,19 @@
 
 A Ruby client for the [Wealthsimple API](https://developers.wealthsimple.com/).
 
+### Installation
+
+Add the following to your `Gemfile` and run `bundle install`:
+
+```ruby
+# TODO: Publish to rubygems.org once code is finalized
+gem 'wealthsimple', git: 'https://github.com/wealthsimple/wealthsimple-ruby.git'
+```
+
+### Example Usage
+
+See [samples directory](./samples) for a wide range of samples, or see the basic example below:
+
 ```ruby
 Wealthsimple.configure do |config|
   config.env = :sandbox
