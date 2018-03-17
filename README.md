@@ -21,14 +21,14 @@ To generate the authorization URL to display to or redirect your users:
 
 ```ruby
 Wealthsimple.authorize_url
-# => "https://staging.wealthsimple.com/authorize?client_id=e576c398ce8894e8308af6ccebc25f36be1a5d431d9cde957dd36c9f889b16c6&redirect_uri=https%3A%2F%2Fmyapp.com%2Foauth%2Fcallback&response_type=code
+# => "https://staging.wealthsimple.com/app/authorize?client_id=58a99e4862a1b246a7745523ca230e61dd7feff351056fcb22c73a5d7a2fcd69&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code"
 ```
 
 You can also pass any valid OAuth params like `state` or `scope`:
 
 ```ruby
 Wealthsimple.authorize_url(state: 123, scope: 'read write')
-# => "https://staging.wealthsimple.com/authorize?client_id=e576c398ce8894e8308af6ccebc25f36be1a5d431d9cde957dd36c9f889b16c6&redirect_uri=https%3A%2F%2Fmyapp.com%2Foauth%2Fcallback&response_type=code&state=123&scope=read%20write
+# => "https://staging.wealthsimple.com/app/authorize?client_id=58a99e4862a1b246a7745523ca230e61dd7feff351056fcb22c73a5d7a2fcd69&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&state=123&scope=read%20write"
 ```
 
 To obtain access token (and refresh token if applicable) after the redirect back to your application:
