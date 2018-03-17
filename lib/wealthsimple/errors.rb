@@ -13,4 +13,7 @@ module Wealthsimple
       @response.send(method_name, *args, &block)
     end
   end
+
+  class AuthenticationError < StandardError
+  end
 end
