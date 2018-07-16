@@ -52,3 +52,17 @@ workflows:
       - vulnerability_check:
           requires:
             - checkout_and_bundle
+
+  security-audit:
+    triggers:
+      - schedule:
+          # 11:50 am UTC: 6:50 am EST / 7:50 am EDT
+          cron: "50 11 * * *"
+          filters:
+            branches:
+              only: master
+    jobs:
+      - checkout_and_bundle
+      - vulnerability_check:
+          requires:
+            - checkout_and_bundle
