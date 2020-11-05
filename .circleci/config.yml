@@ -45,11 +45,14 @@ workflows:
   version: 2
   build:
     jobs:
-      - checkout_and_bundle
+      - checkout_and_bundle:
+          context: wealthsimple
       - rspec:
+          context: wealthsimple
           requires:
             - checkout_and_bundle
       - vulnerability_check:
+          context: wealthsimple
           requires:
             - checkout_and_bundle
 
@@ -62,7 +65,9 @@ workflows:
             branches:
               only: master
     jobs:
-      - checkout_and_bundle
+      - checkout_and_bundle:
+          context: wealthsimple
       - vulnerability_check:
+          context: wealthsimple
           requires:
             - checkout_and_bundle
