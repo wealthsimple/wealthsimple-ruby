@@ -5,6 +5,7 @@ describe Wealthsimple::Request do
         config.env = :production
         config.api_version = "v1"
         config.client_id = "oauth_client_1"
+        config.client_secret = "oauth_client_secret_1"
       end
     end
 

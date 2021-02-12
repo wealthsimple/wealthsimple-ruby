@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
   s.required_ruby_version = ">= 2.3"
 
+  s.add_runtime_dependency 'oauth2'
   s.add_runtime_dependency 'faraday'
   s.add_runtime_dependency 'json'
   s.add_runtime_dependency "activesupport"

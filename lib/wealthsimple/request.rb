@@ -6,16 +6,6 @@ module Wealthsimple
     end
   end
 
-  def self.authenticate(oauth_details)
-    body = {
-      client_id: config.client_id,
-      client_secret: config.client_secret,
-    }.merge(oauth_details)
-    response = post("/oauth/token", { body: body })
-    config.auth = response.to_h
-    response
-  end
-
   class Request
     attr_reader :extra_attributes
     def initialize(method:, path:, headers: {}, query: {}, body: nil, **extra_attributes)
@@ -31,7 +21,7 @@ module Wealthsimple
     end
 
     def execute
-      connection = Faraday.new(url: base_url) do |faraday|
+      connection = Faraday.new(url: Wealthsimple.api_base_url) do |faraday|
         faraday.adapter Faraday.default_adapter
       end
       response = connection.send(@method) do |request|
@@ -60,19 +50,14 @@ module Wealthsimple
 
     private
 
-    def base_url
-      "https://api.#{Wealthsimple.config.env}.wealthsimple.com"
-    end
-
     def headers
       headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Date': Time.now.utc.httpdate,
       }.merge(@headers)
-      # TODO: check auth expiration
       if Wealthsimple.config.auth.present?
-        headers['Authorization'] = "Bearer #{Wealthsimple.config.auth['access_token']}"
+        headers['Authorization'] = "Bearer #{Wealthsimple.auth.token}"
       end
       headers
     end
