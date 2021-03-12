@@ -1,73 +1,53 @@
-# Ruby CircleCI 2.0 configuration file
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-version: 2
+version: 2.1
 
-defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: circleci/ruby:2.5.0
+orbs:
+  gem: wealthsimple/gem@dev:master
+  ruby: wealthsimple/ruby@dev:master
 
 references:
-  attach_code_workspace: &attach_code_workspace
-    attach_workspace:
-      at: ~/repo
-
-  restore_bundle_dependencies: &restore_bundle_dependencies
-    run:
-      name: Restore bundle dependencies from workspace
-      command: bundle --path vendor/bundle
-
-jobs:
-  checkout_and_bundle:
-    <<: *defaults
-    steps:
-      - checkout
-      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  rspec:
-    <<: *defaults
-    steps:
-      - *attach_code_workspace
-      - *restore_bundle_dependencies
-      - run: bundle exec rspec
-
-  vulnerability_check:
-    <<: *defaults
-    steps:
-      - *attach_code_workspace
-      - *restore_bundle_dependencies
-      - run: bundle exec bundle-audit update && bundle exec bundle-audit check
+  parameters: &parameters
+    ruby_version: '2.7.2'
+    context: wealthsimple
 
 workflows:
-  version: 2
-  build:
+  build-and-deploy:
     jobs:
-      - checkout_and_bundle:
-          context: wealthsimple
-      - rspec:
-          context: wealthsimple
+      - gem/checkout:
+          name: checkout_and_bundle
+          <<: *parameters
+      - gem/test:
+          name: rspec
+          <<: *parameters
           requires:
             - checkout_and_bundle
-      - vulnerability_check:
-          context: wealthsimple
+      - ruby/security_check:
+          name: vulnerability_check
+          <<: *parameters
           requires:
             - checkout_and_bundle
-
+      - gem/release:
+          name: release
+          <<: *parameters
+          filters:
+            branches:
+              only: master
+          requires:
+            - rspec
+            - vulnerability_check
   security-audit:
     triggers:
       - schedule:
-          # 11:50 am UTC: 6:50 am EST / 7:50 am EDT
-          cron: "50 11 * * *"
+          # 11:05 am UTC: 6:05 am EST / 7:05 am EDT
+          cron: "5 11 * * *"
           filters:
             branches:
               only: master
     jobs:
-      - checkout_and_bundle:
-          context: wealthsimple
-      - vulnerability_check:
-          context: wealthsimple
+      - gem/checkout:
+          name: checkout_and_bundle
+          <<: *parameters
+      - ruby/security_check:
+          name: vulnerability_check
+          <<: *parameters
           requires:
             - checkout_and_bundle
