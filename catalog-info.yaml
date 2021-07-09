@@ -1,0 +1,11 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: wealthsimple-ruby
+  description: Ruby bindings for the Wealthsimple API
+  tags:
+    - ruby
+spec:
+  type: other
+  lifecycle: production
