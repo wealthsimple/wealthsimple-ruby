@@ -5,7 +5,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/ruby:2.5.0
+    - image: circleci/ruby:2.7.3
 
 references:
   attach_code_workspace: &attach_code_workspace
