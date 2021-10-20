@@ -1,0 +1,28 @@
+name: Default
+
+on: push
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preflight_check:
+    name: Preflight Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Security
+        uses: wealthsimple/toolbox-script@v1
+        with:
+          script: toolbox.ruby.security.run();
+
+      - name: Test
+        uses: wealthsimple/toolbox-script@v1
+        with:
+          script: toolbox.ruby.test.run();
