@@ -16,8 +16,8 @@ module Wealthsimple
   end
 
   class Configuration
-    REQUIRED_ATTRIBUTES = [:env, :api_version, :client_id]
-    ATTRIBUTES = [:client_secret, :auth] + REQUIRED_ATTRIBUTES
+    REQUIRED_ATTRIBUTES = [:env, :api_version, :client_id, :client_secret]
+    ATTRIBUTES = [:auth, :redirect_uri] + REQUIRED_ATTRIBUTES
     attr_accessor *ATTRIBUTES
 
     def validate!
